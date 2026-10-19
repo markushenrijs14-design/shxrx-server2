@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: shxrx-optimizer-backend
+    runtime: python
+    plan: starter            # smallest paid plan - persistent disks are not available on "free"
+    buildCommand: "true"     # no dependencies to install - stdlib only
+    startCommand: "python shxrx_server.py"
+    healthCheckPath: /status
+    envVars:
+      - key: ADMIN_TOKEN
+        generateValue: true  # Render generates a long random secret; copy it into keygen2.py's setup dialog
+      - key: SHXRX_DATA_DIR
+        value: /var/data     # must match disk.mountPath below
+      # PORT is injected automatically by Render - do not set it yourself
+    disk:
+      name: shxrx-data
+      mountPath: /var/data
+      sizeGB: 1

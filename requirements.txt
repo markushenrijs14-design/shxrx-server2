@@ -1,0 +1,2 @@
+# shxrx_server.py uses only the Python standard library - nothing to install here.
+# This file exists so Render's Python build step is explicit rather than guessed.
